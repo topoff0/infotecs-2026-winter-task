@@ -1,0 +1,37 @@
+# =================== Ignore files for .NET Core ===================
+
+## Ignore build output
+bin/
+obj/
+## User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ASP.NET Core
+## Auto-generated files
+*.vs/
+.vscode/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## Environment variables
+.env
+
+# =================== OS-specific files ===================
+## Windows
+Thumbs.db
+ehthumbs.db
+## macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+## Linux
+*~
+
+
+# Database and migrations
+Migrations/
