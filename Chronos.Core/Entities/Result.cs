@@ -11,6 +11,7 @@ public class Result
     public double MinNumericValue { get; private set; }
     public double MaxNumericValue { get; private set; }
 
+    public string FileName { get; private set; } = string.Empty;
 
     public static Result Create(double deltaDate,
             DateTime minDate,
@@ -18,7 +19,8 @@ public class Result
             double avgNumericValue,
             double medianNumericValue,
             double minNumericValue,
-            double maxNumericValue)
+            double maxNumericValue,
+            string fileName)
         => new()
         {
             Id = Guid.NewGuid(),
@@ -28,7 +30,8 @@ public class Result
             AvgNumericValue = avgNumericValue,
             MedianNumericValue = medianNumericValue,
             MinNumericValue = minNumericValue,
-            MaxNumericValue = maxNumericValue
+            MaxNumericValue = maxNumericValue,
+            FileName = fileName
         };
 
 }
