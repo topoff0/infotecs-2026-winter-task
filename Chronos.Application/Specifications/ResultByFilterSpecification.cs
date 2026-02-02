@@ -7,7 +7,7 @@ namespace Chronos.Application.Specifications;
 
 public sealed class ResultByFilterSpecification(ResultFilter filter) : ISpecification<Result>
 {
-    public Expression<Func<Result, bool>> Criteria { get; private set; } = r =>
+    public Expression<Func<Result, bool>> Criteria { get; } = r =>
             (filter.FileName == null || r.FileName == filter.FileName) &&
             (!filter.FirstOperationsStartedFrom.HasValue || r.MinDate >= filter.FirstOperationsStartedFrom) &&
             (!filter.FirstOperationStartedTo.HasValue || r.MinDate <= filter.FirstOperationStartedTo) &&
@@ -15,4 +15,10 @@ public sealed class ResultByFilterSpecification(ResultFilter filter) : ISpecific
             (!filter.AvgNumericValueTo.HasValue || r.AvgNumericValue <= filter.AvgNumericValueTo) &&
             (!filter.AvgExecutionTimeFrom.HasValue || r.AvgExecutionTime >= filter.AvgExecutionTimeFrom) &&
             (!filter.AvgExecutionTimeTo.HasValue || r.AvgExecutionTime <= filter.AvgExecutionTimeTo);
+
+    public Expression<Func<Result, object>>? OrderBy { get; } = null; 
+
+    public bool? OrderByDescending { get; } = null; 
+
+    public int? Take { get; } = null;
 }

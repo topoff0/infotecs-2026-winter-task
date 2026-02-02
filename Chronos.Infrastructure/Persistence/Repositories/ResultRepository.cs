@@ -31,7 +31,20 @@ public class ResultRepository(ChronosDbContext context) : IResultRepository
 
     public async Task<IReadOnlyList<Result>> GetFiilteredAsync(ISpecification<Result> specification, CancellationToken token = default)
     {
-        return await _context.Results.Where(specification.Criteria).ToListAsync(token);
+        IQueryable<Result> query = _context.Results;
+
+        if (specification.Criteria != null)
+            query = query.Where(specification.Criteria);
+
+        if (specification.OrderBy != null)
+            query = (specification.OrderByDescending != null && specification.OrderByDescending.Value == true)
+                ? query.OrderByDescending(specification.OrderBy)
+                : query.OrderBy(specification.OrderBy);
+
+        if (specification.Take != null)
+            query = query.Take(specification.Take.Value);
+        
+        return await query.ToListAsync(token);
     }
 
     public void Update(Result entity)
