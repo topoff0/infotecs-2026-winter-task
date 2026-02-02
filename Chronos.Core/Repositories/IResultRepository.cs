@@ -5,5 +5,6 @@ namespace Chronos.Core.Repositories;
 
 public interface IResultRepository : IRepository<Result>
 {
-
+    Task<IReadOnlyList<Result>> GetFiilteredAsync(ISpecification<Result> specification,
+                                                  CancellationToken token = default);
 }
