@@ -1,6 +1,8 @@
-﻿using Chronos.Core.Repositories;
+﻿using Chronos.Application.Services;
+using Chronos.Core.Repositories;
 using Chronos.Infrastructure.Persistence;
 using Chronos.Infrastructure.Persistence.Repositories;
+using Chronos.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +17,8 @@ public static class DependencyInjection
         services.AddChronosDbContext(configuration);
 
         services.AddRepositories();
+
+        services.AddServices();
 
         return services;
     }
@@ -47,6 +51,13 @@ public static class DependencyInjection
         services.AddScoped<IValueRepository, ValueRepository>();
 
         services.AddScoped<IResultRepository, ResultRepository>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services.AddScoped<ICsvParser, CsvParser>();
 
         return services;
     }
