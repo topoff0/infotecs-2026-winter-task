@@ -5,9 +5,9 @@ using Chronos.Core.Repositories.Common;
 
 namespace Chronos.Application.Specifications;
 
-public sealed class ResultByFilterSpecification(ResultFilter filter) : ISpecification<Result>
+public sealed class ResultByFilterSpecification(ResultFilter filter) : ISpecification<ResultEntity>
 {
-    public Expression<Func<Result, bool>> Criteria { get; } = r =>
+    public Expression<Func<ResultEntity, bool>> Criteria { get; } = r =>
             (filter.FileName == null || r.FileName == filter.FileName) &&
             (!filter.FirstOperationsStartedFrom.HasValue || r.MinDate >= filter.FirstOperationsStartedFrom) &&
             (!filter.FirstOperationStartedTo.HasValue || r.MinDate <= filter.FirstOperationStartedTo) &&
@@ -16,7 +16,7 @@ public sealed class ResultByFilterSpecification(ResultFilter filter) : ISpecific
             (!filter.AvgExecutionTimeFrom.HasValue || r.AvgExecutionTime >= filter.AvgExecutionTimeFrom) &&
             (!filter.AvgExecutionTimeTo.HasValue || r.AvgExecutionTime <= filter.AvgExecutionTimeTo);
 
-    public Expression<Func<Result, object>>? OrderBy { get; } = null; 
+    public Expression<Func<ResultEntity, object>>? OrderBy { get; } = null; 
 
     public bool? OrderByDescending { get; } = null; 
 

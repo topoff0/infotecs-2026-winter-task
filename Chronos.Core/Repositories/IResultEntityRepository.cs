@@ -3,8 +3,8 @@ using Chronos.Core.Repositories.Common;
 
 namespace Chronos.Core.Repositories;
 
-public interface IResultRepository : IRepository<Result>
+public interface IResultEntityRepository : IRepository<ResultEntity>
 {
-    Task<IReadOnlyList<Result>> GetFiilteredAsync(ISpecification<Result> specification,
+    Task<IReadOnlyList<ResultEntity>> GetFiilteredAsync(ISpecification<ResultEntity> specification,
                                                   CancellationToken token = default);
 }

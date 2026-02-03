@@ -1,6 +1,6 @@
 ﻿namespace Chronos.Core.Entities;
 
-public class Result
+public class ResultEntity
 {
     public Guid Id { get; private set; }
     public double DeltaDate { get; private set; }
@@ -13,7 +13,7 @@ public class Result
 
     public string FileName { get; private set; } = string.Empty;
 
-    public static Result Create(double deltaDate,
+    public static ResultEntity Create(double deltaDate,
             DateTime minDate,
             double avgExecutionTime,
             double avgNumericValue,

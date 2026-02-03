@@ -7,8 +7,8 @@ public class ChronosDbContext(DbContextOptions<ChronosDbContext> options)
     : DbContext(options)
 {
 
-    public DbSet<Value> Values { get; set; }
-    public DbSet<Result> Results { get; set; }
+    public DbSet<ValueEntity> ValueEntities { get; set; }
+    public DbSet<ResultEntity> ResultEntities { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder builder)

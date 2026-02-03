@@ -1,13 +1,13 @@
 ﻿namespace Chronos.Core.Entities;
 
-public class Value
+public class ValueEntity
 {
     public Guid Id { get; private set; }
     public DateTime DateStart { get; private set; }
     public double ExecutionTime { get; private set; }
     public double NumericValue { get; private set; }
 
-    public static Value Create(DateTime dateStart,
+    public static ValueEntity Create(DateTime dateStart,
                                double executionTime,
                                double numericValue)
         => new()

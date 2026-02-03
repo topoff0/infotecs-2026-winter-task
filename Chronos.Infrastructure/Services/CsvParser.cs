@@ -7,7 +7,7 @@ namespace Chronos.Infrastructure.Services;
 public class CsvParser : ICsvParser
 {
 
-    public async Task<IReadOnlyList<Value>> Parse(Stream stream, CancellationToken token)
+    public async Task<IReadOnlyList<ValueEntity>> Parse(Stream stream, CancellationToken token)
     {
         var reader = new StreamReader(stream);
 
@@ -16,7 +16,7 @@ public class CsvParser : ICsvParser
         if (lines.Length < 1 || lines.Length > 10_000)
             throw new ValidationException("Invalid lines count");
 
-        var values = new List<Value>();
+        var values = new List<ValueEntity>();
 
         foreach (var line in lines.Skip(1))
         {
@@ -43,7 +43,7 @@ public class CsvParser : ICsvParser
             if (numericValue < 0)
                 throw new ValidationException("Invalid value of the numeric value");
 
-            values.Add(Value.Create(date, executionTime, numericValue));
+            values.Add(ValueEntity.Create(date, executionTime, numericValue));
         }
 
         return values;

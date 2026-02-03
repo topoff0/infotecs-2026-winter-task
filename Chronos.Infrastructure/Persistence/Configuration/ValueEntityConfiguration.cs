@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Chronos.Infrastructure.Persistence.Configuration;
 
-public class ValueConfiguration : IEntityTypeConfiguration<Value>
+public class ValueEntityConfiguration : IEntityTypeConfiguration<ValueEntity>
 {
-    public void Configure(EntityTypeBuilder<Value> builder)
+    public void Configure(EntityTypeBuilder<ValueEntity> builder)
     {
         builder.ToTable("Values");
 

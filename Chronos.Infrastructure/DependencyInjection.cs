@@ -1,6 +1,5 @@
 ﻿using Chronos.Application.Services;
-using Chronos.Core.Repositories;
-using Chronos.Infrastructure.Persistence;
+using Chronos.Core.Repositories; using Chronos.Infrastructure.Persistence;
 using Chronos.Infrastructure.Persistence.Repositories;
 using Chronos.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -48,9 +47,9 @@ public static class DependencyInjection
 
     private static IServiceCollection AddRepositories(this IServiceCollection services)
     {
-        services.AddScoped<IValueRepository, ValueRepository>();
+        services.AddScoped<IValueEntityRepository, ValueEntityRepository>();
 
-        services.AddScoped<IResultRepository, ResultRepository>();
+        services.AddScoped<IResultEntityRepository, ResultEntityRepository>();
 
         return services;
     }

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Chronos.Infrastructure.Persistence.Configuration;
 
-public class ResultConfigurations : IEntityTypeConfiguration<Result>
+public class ResultEntityConfigurations : IEntityTypeConfiguration<ResultEntity>
 {
-    public void Configure(EntityTypeBuilder<Result> builder)
+    public void Configure(EntityTypeBuilder<ResultEntity> builder)
     {
         builder.ToTable("Results");
 
