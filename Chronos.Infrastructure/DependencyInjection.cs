@@ -1,7 +1,4 @@
-﻿using Chronos.Application.Specifications;
-using Chronos.Core.Entities;
-using Chronos.Core.Repositories;
-using Chronos.Core.Repositories.Common;
+﻿using Chronos.Core.Repositories;
 using Chronos.Infrastructure.Persistence;
 using Chronos.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +16,8 @@ public static class DependencyInjection
 
         services.AddRepositories();
 
-        services.AddSpecifications();
-
         return services;
     }
-
 
     // ============================== PRIVATE ========================================
 
@@ -53,13 +47,6 @@ public static class DependencyInjection
         services.AddScoped<IValueRepository, ValueRepository>();
 
         services.AddScoped<IResultRepository, ResultRepository>();
-
-        return services;
-    }
-
-    private static IServiceCollection AddSpecifications(this IServiceCollection services)
-    {
-        services.AddScoped<ISpecification<Result>, ResultByFilterSpecification>();
 
         return services;
     }
