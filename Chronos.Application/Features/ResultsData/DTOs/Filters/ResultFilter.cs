@@ -1,4 +1,4 @@
-﻿namespace Chronos.Application.Features.ResultsData.DTOs;
+﻿namespace Chronos.Application.Features.ResultsData.DTOs.Filters;
 
 public sealed record ResultFilter(string? FileName,
                                   DateTime? FirstOperationsStartedFrom,

@@ -3,7 +3,7 @@
 public class ResultEntity
 {
     public Guid Id { get; private set; }
-    public double DeltaDate { get; private set; }
+    public double DeltaSeconds { get; private set; }
     public DateTime MinDate { get; private set; }
     public double AvgExecutionTime { get; private set; }
     public double AvgNumericValue { get; private set; }
@@ -13,7 +13,7 @@ public class ResultEntity
 
     public string FileName { get; private set; } = string.Empty;
 
-    public static ResultEntity Create(double deltaDate,
+    public static ResultEntity Create(double deltaSeconds,
             DateTime minDate,
             double avgExecutionTime,
             double avgNumericValue,
@@ -24,7 +24,7 @@ public class ResultEntity
         => new()
         {
             Id = Guid.NewGuid(),
-            DeltaDate = deltaDate,
+            DeltaSeconds = deltaSeconds,
             MinDate = minDate,
             AvgExecutionTime = avgExecutionTime,
             AvgNumericValue = avgNumericValue,

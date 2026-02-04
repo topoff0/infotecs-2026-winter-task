@@ -27,7 +27,7 @@ public class ResultEntityConfigurations : IEntityTypeConfiguration<ResultEntity>
         builder.Property(r => r.AvgExecutionTime)
             .IsRequired();
 
-        builder.Property(r => r.DeltaDate)
+        builder.Property(r => r.DeltaSeconds)
             .IsRequired();
 
         builder.Property(r => r.MinDate)

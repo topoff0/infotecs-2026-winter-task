@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-using Chronos.Application.Features.ResultsData.DTOs;
+using Chronos.Application.Features.ResultsData.DTOs.Filters;
 using Chronos.Core.Entities;
 using Chronos.Core.Repositories.Common;
 
