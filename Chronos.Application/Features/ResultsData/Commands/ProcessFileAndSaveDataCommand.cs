@@ -11,7 +11,7 @@ using Unit = Chronos.Application.Common.Results.Unit;
 
 namespace Chronos.Application.Features.ResultsData.Commands;
 
-public record ProcessFileAndSaveDataCommand(ProcessFileRequest Dto)
+public record ProcessFileAndSaveDataCommand(string FileName, Stream CsvStream)
     : IRequest<ResultT<Unit>>;
 
 
@@ -32,16 +32,16 @@ public sealed class ProcessFileAndSaveDataCommandHandler(IValueEntityRepository 
     {
         try
         {
-            var values = await _csvParser.Parse(request.Dto.CsvStream, token);
+            var values = await _csvParser.Parse(request.FileName, request.CsvStream, token);
 
 
             await _unitOfWork.BeginAsync(token);
 
-            await _valueRepository.DeleteByFileNameAsync(request.Dto.FileName, token);
-            await _resultRepository.DeleteByFileName(request.Dto.FileName, token);
+            await _valueRepository.DeleteByFileNameAsync(request.FileName, token);
+            await _resultRepository.DeleteByFileName(request.FileName, token);
 
-            var calculateRequest = new CalculateResultRequest(request.Dto.FileName, values);
-            var resultEntity = _resultCalculator.Calculate(calculateRequest);
+            var calculateDto = new CalculateResultDto(request.FileName, values);
+            var resultEntity = _resultCalculator.Calculate(calculateDto);
 
             await _valueRepository.AddRangeAsync(values, token);
             await _resultRepository.AddAsync(resultEntity, token);

@@ -23,6 +23,29 @@ public static class DependencyInjection
         return services;
     }
 
+    public static async Task ApplyMigrationAsync(this IServiceProvider serviceProvider)
+    {
+        using var scope = serviceProvider.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ChronosDbContext>();
+
+        try
+        {
+            // TODO: Add logger
+            var pendingingMigraitons = await context.Database.GetPendingMigrationsAsync();
+
+            if (pendingingMigraitons.Any())
+            {
+                await context.Database.MigrateAsync();
+            }
+        }
+        catch (Exception)
+        {
+            // TODO: Add logger
+            throw;
+        }
+    }
+
+
     // ============================== PRIVATE ========================================
 
     private static IServiceCollection AddChronosDbContext(this IServiceCollection services,

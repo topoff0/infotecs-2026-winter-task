@@ -7,7 +7,7 @@ namespace Chronos.Infrastructure.Services;
 public class CsvParser : ICsvParser
 {
 
-    public async Task<IReadOnlyList<ValueEntity>> Parse(Stream stream, CancellationToken token)
+    public async Task<IReadOnlyList<ValueEntity>> Parse(string fileName, Stream stream, CancellationToken token)
     {
         var reader = new StreamReader(stream);
 
@@ -43,7 +43,7 @@ public class CsvParser : ICsvParser
             if (numericValue < 0)
                 throw new ValidationException("Invalid value of the numeric value");
 
-            values.Add(ValueEntity.Create(date, executionTime, numericValue));
+            values.Add(ValueEntity.Create(date, executionTime, numericValue, fileName));
         }
 
         return values;

@@ -7,7 +7,7 @@ namespace Chronos.API.Controllers
 {
     [Route("api/timescale")]
     [ApiController]
-    public sealed class TimeScaleDataController(IMediator mediator) : ControllerBase
+    public sealed class TimescaleDataController(IMediator mediator) : ControllerBase
     {
         private readonly IMediator _mediator = mediator;
 

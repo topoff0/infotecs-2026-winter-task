@@ -5,5 +5,5 @@ namespace Chronos.Application.Services;
 
 public interface IResultCalculator
 {
-    ResultEntity Calculate(CalculateResultRequest request);
+    ResultEntity Calculate(CalculateResultDto dto);
 }

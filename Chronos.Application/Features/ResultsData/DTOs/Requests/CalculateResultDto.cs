@@ -2,4 +2,4 @@
 
 namespace Chronos.Application.Features.ResultsData.DTOs.Requests;
 
-public record class CalculateResultRequest(string FileName, IReadOnlyList<ValueEntity> Values);
+public record class CalculateResultDto(string FileName, IReadOnlyList<ValueEntity> Values);

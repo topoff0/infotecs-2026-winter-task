@@ -6,20 +6,20 @@ namespace Chronos.Infrastructure.Services;
 
 public class ResultCalculator : IResultCalculator
 {
-    public ResultEntity Calculate(CalculateResultRequest request)
+    public ResultEntity Calculate(CalculateResultDto dto)
     {
-        var minDate = request.Values.Min(v => v.DateStart);
-        var maxDate = request.Values.Max(v => v.DateStart);
+        var minDate = dto.Values.Min(v => v.DateStart);
+        var maxDate = dto.Values.Max(v => v.DateStart);
 
         return ResultEntity.Create(
-        fileName: request.FileName,
+        fileName: dto.FileName,
         deltaSeconds: (maxDate - minDate).TotalSeconds,
         minDate: minDate,
-        avgExecutionTime: request.Values.Average(v => v.ExecutionTime),
-        avgNumericValue: request.Values.Average(v => v.NumericValue),
-        medianNumericValue: Median(request.Values.Select(v => v.NumericValue)),
-        maxNumericValue: request.Values.Max(v => v.NumericValue),
-        minNumericValue: request.Values.Min(v => v.NumericValue)
+        avgExecutionTime: dto.Values.Average(v => v.ExecutionTime),
+        avgNumericValue: dto.Values.Average(v => v.NumericValue),
+        medianNumericValue: Median(dto.Values.Select(v => v.NumericValue)),
+        maxNumericValue: dto.Values.Max(v => v.NumericValue),
+        minNumericValue: dto.Values.Min(v => v.NumericValue)
         );
     }
 
