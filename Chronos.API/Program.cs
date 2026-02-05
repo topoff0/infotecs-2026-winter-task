@@ -14,6 +14,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 // ====================== APP ==========================
 var app = builder.Build();
 
+await app.Services.ApplyMigrationAsync();
+
 app.UseMySwagger(app.Environment);
 
 app.Run();
