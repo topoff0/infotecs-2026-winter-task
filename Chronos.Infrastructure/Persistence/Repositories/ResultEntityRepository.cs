@@ -19,6 +19,14 @@ public class ResultEntityRepository(ChronosDbContext context) : IResultEntityRep
         _context.ResultEntities.Remove(entity);
     }
 
+    public async Task DeleteByFileName(string fileName, CancellationToken token)
+    {
+        var entity = await _context.ResultEntities.FirstOrDefaultAsync(v => v.FileName == fileName, token);
+
+        if (entity is not null)
+            _context.Remove(entity);
+    }
+
     public async Task<IEnumerable<ResultEntity>> GetAllAsync(CancellationToken token = default)
     {
         return await _context.ResultEntities.ToListAsync(token);

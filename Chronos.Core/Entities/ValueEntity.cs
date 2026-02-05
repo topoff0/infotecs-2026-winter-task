@@ -7,26 +7,18 @@ public class ValueEntity
     public double ExecutionTime { get; private set; }
     public double NumericValue { get; private set; }
 
+    public string FileName { get; private set; } = string.Empty;
+
     public static ValueEntity Create(DateTime dateStart,
                                double executionTime,
-                               double numericValue)
+                               double numericValue,
+                               string fileName)
         => new()
         {
             Id = Guid.NewGuid(),
             DateStart = dateStart,
             ExecutionTime = executionTime,
-            NumericValue = numericValue
+            NumericValue = numericValue,
+            FileName = fileName
         };
-
-    public void Update(DateTime? dateStart = null,
-                       double? executionTime = null,
-                       double? numericValue = null)
-    {
-        if (dateStart.HasValue)
-            DateStart = dateStart.Value;
-        if (executionTime.HasValue)
-            ExecutionTime = executionTime.Value;
-        if (numericValue.HasValue)
-            NumericValue = numericValue.Value;
-    }
 }

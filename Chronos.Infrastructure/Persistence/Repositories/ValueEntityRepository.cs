@@ -13,9 +13,22 @@ public class ValueEntityRepository(ChronosDbContext context) : IValueEntityRepos
         await _context.ValueEntities.AddAsync(entity, token);
     }
 
+    public async Task AddRangeAsync(IReadOnlyList<ValueEntity> entities, CancellationToken token)
+    {
+        await _context.AddRangeAsync(entities, token);
+    }
+
     public void Delete(ValueEntity entity)
     {
         _context.ValueEntities.Remove(entity);
+    }
+
+    public async Task DeleteByFileNameAsync(string fileName, CancellationToken token)
+    {
+        var entities = await _context.ValueEntities.Where(v => v.FileName == fileName).ToListAsync(token);
+
+        if (entities is not null)
+            _context.RemoveRange(entities);
     }
 
     public async Task<IEnumerable<ValueEntity>> GetAllAsync(CancellationToken token = default)
