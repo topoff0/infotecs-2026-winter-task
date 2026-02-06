@@ -3,9 +3,9 @@ using Chronos.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
-
 builder.Services.AddControllers();
+
+builder.Services.AddOpenApi();
 
 builder.Services.AddMySwagger();
 
@@ -17,6 +17,8 @@ var app = builder.Build();
 await app.Services.ApplyMigrationAsync();
 
 app.UseMySwagger(app.Environment);
+
+app.MapControllers();
 
 app.Run();
 

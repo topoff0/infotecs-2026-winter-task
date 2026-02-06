@@ -16,7 +16,7 @@ namespace Chronos.API.Controllers
         {
             await using var stream = request.File.OpenReadStream();
 
-            var command = new ProcessFileAndSaveDataCommand(request.FileName, stream);
+            var command = new ProcessFileAndSaveDataCommand(request.File.FileName, stream);
             var result = await _mediator.Send(command, token);
 
             if (result.IsSuccess)

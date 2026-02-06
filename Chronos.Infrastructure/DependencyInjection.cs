@@ -1,7 +1,10 @@
-﻿using Chronos.Application.Services;
+﻿using Chronos.Application.Features.ResultsData.Commands;
+using Chronos.Application.Services;
 using Chronos.Core.Repositories;
+using Chronos.Core.Repositories.Common;
 using Chronos.Infrastructure.Persistence;
 using Chronos.Infrastructure.Persistence.Repositories;
+using Chronos.Infrastructure.Persistence.Repositories.Common;
 using Chronos.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -51,7 +54,7 @@ public static class DependencyInjection
     private static IServiceCollection AddChronosDbContext(this IServiceCollection services,
                                                           IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("ChronosConnection")
+        var connectionString = configuration.GetConnectionString("ChronosDbConnection")
             ?? throw new InvalidOperationException(
                 "Connection string 'ChronosConnection' is not configured");
 
@@ -75,6 +78,8 @@ public static class DependencyInjection
 
         services.AddScoped<IResultEntityRepository, ResultEntityRepository>();
 
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+
         return services;
     }
 
@@ -83,6 +88,11 @@ public static class DependencyInjection
         services.AddScoped<ICsvParser, CsvParser>();
 
         services.AddScoped<IResultCalculator, ResultCalculator>();
+
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(typeof(ProcessFileAndSaveDataCommand).Assembly);
+        });
 
         return services;
     }
