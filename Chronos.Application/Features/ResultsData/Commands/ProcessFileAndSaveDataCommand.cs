@@ -34,30 +34,28 @@ public sealed class ProcessFileAndSaveDataCommandHandler(IValueEntityRepository 
         {
             var values = await _csvParser.Parse(request.FileName, request.CsvStream, token);
 
-
-            await _unitOfWork.BeginAsync(token);
-
-            await _valueRepository.DeleteByFileNameAsync(request.FileName, token);
-            await _resultRepository.DeleteByFileName(request.FileName, token);
-
             var calculateDto = new CalculateResultDto(request.FileName, values);
             var resultEntity = _resultCalculator.Calculate(calculateDto);
 
-            await _valueRepository.AddRangeAsync(values, token);
-            await _resultRepository.AddAsync(resultEntity, token);
+            await _unitOfWork.ExecuteInTransactionAsync(async () =>
+            {
+                await _valueRepository.DeleteByFileNameAsync(request.FileName, token);
+                await _resultRepository.DeleteByFileNameAsync(request.FileName, token);
 
-            await _unitOfWork.CommitAsync(token);
+                await _valueRepository.AddRangeAsync(values, token);
+                await _resultRepository.AddAsync(resultEntity, token);
+
+                await _unitOfWork.SaveChangesAsync();
+            }, token);
 
             return Unit.Value;
         }
-        catch(ValidationException ex)
+        catch (ValidationException ex)
         {
-            await _unitOfWork.RollBackAsync();
             return CsvParseErrors.Validation(ex.Message);
         }
-        catch(InvalidOperationException ex)
+        catch (InvalidOperationException ex)
         {
-            await _unitOfWork.RollBackAsync();
             return UnitOfWorkErrors.TransactionNotStarted(ex.Message);
         }
         catch (Exception ex)

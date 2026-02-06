@@ -31,6 +31,8 @@ public class CsvParser : ICsvParser
             if (date < new DateTime(2000, 1, 1) || date >= DateTime.UtcNow)
                 throw new ValidationException("Invalid date range");
 
+            date = DateTime.SpecifyKind(date, DateTimeKind.Utc);
+
             if (!double.TryParse(parts[1], out var executionTime))
                 throw new ValidationException("Invalid execution time format");
 
