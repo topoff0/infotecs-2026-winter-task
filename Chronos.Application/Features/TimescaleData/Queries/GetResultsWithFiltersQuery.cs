@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Chronos.Application.Features.TimescaleData.Queries;
 
-public record GetResultsWithFiltersQuery(ResultFilter Filters)
+public record GetResultsWithFiltersQuery(ResultFilters Filters)
     : IRequest<ResultT<IReadOnlyList<ResultEntity>>>;
 
 public sealed class GetResultWithFilterQueryHandler(IResultEntityRepository resultRepository)

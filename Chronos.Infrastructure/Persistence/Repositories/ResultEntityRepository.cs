@@ -41,15 +41,15 @@ public class ResultEntityRepository(ChronosDbContext context) : IResultEntityRep
     {
         IQueryable<ResultEntity> query = _context.ResultEntities;
 
-        if (specification.Criteria != null)
+        if (specification.Criteria is not null)
             query = query.Where(specification.Criteria);
 
-        if (specification.OrderBy != null)
+        if (specification.OrderBy is not null)
             query = (specification.OrderByDescending != null && specification.OrderByDescending.Value == true)
                 ? query.OrderByDescending(specification.OrderBy)
                 : query.OrderBy(specification.OrderBy);
 
-        if (specification.Take != null)
+        if (specification.Take is not null)
             query = query.Take(specification.Take.Value);
         
         return await query.ToListAsync(token);
