@@ -5,7 +5,7 @@ namespace Chronos.Core.Repositories;
 
 public interface IResultEntityRepository : IRepository<ResultEntity>
 {
-    Task<IReadOnlyList<ResultEntity>> GetFiilteredAsync(ISpecification<ResultEntity> specification,
+    Task<IReadOnlyList<ResultEntity>> GetFilteredAsync(ISpecification<ResultEntity> specification,
                                                   CancellationToken token = default);
 
     Task DeleteByFileNameAsync(string fileName, CancellationToken token);

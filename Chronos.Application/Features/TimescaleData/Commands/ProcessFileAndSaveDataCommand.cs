@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Chronos.Application.Common.Errors;
 using Chronos.Application.Common.Results;
-using Chronos.Application.Features.ResultsData.DTOs.Requests;
-using Chronos.Application.Features.ResultsData.Errors;
+using Chronos.Application.Features.TimescaleData.DTOs.Requests;
+using Chronos.Application.Features.TimescaleData.Errors;
 using Chronos.Application.Services;
 using Chronos.Core.Repositories;
 using Chronos.Core.Repositories.Common;
 using MediatR;
 using Unit = Chronos.Application.Common.Results.Unit;
 
-namespace Chronos.Application.Features.ResultsData.Commands;
+namespace Chronos.Application.Features.TimescaleData.Commands;
 
 public record ProcessFileAndSaveDataCommand(string FileName, Stream CsvStream)
     : IRequest<ResultT<Unit>>;
@@ -48,15 +48,11 @@ public sealed class ProcessFileAndSaveDataCommandHandler(IValueEntityRepository 
                 await _unitOfWork.SaveChangesAsync();
             }, token);
 
-            return Unit.Value;
+            return ResultT<Unit>.Success(Unit.Value);
         }
         catch (ValidationException ex)
         {
             return CsvParseErrors.Validation(ex.Message);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return UnitOfWorkErrors.TransactionNotStarted(ex.Message);
         }
         catch (Exception ex)
         {

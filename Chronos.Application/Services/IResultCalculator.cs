@@ -1,4 +1,4 @@
-﻿using Chronos.Application.Features.ResultsData.DTOs.Requests;
+﻿using Chronos.Application.Features.TimescaleData.DTOs.Requests;
 using Chronos.Core.Entities;
 
 namespace Chronos.Application.Services;

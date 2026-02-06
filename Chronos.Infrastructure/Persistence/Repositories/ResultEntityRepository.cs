@@ -37,7 +37,7 @@ public class ResultEntityRepository(ChronosDbContext context) : IResultEntityRep
         return await _context.ResultEntities.FindAsync([id], token);
     }
 
-    public async Task<IReadOnlyList<ResultEntity>> GetFiilteredAsync(ISpecification<ResultEntity> specification, CancellationToken token = default)
+    public async Task<IReadOnlyList<ResultEntity>> GetFilteredAsync(ISpecification<ResultEntity> specification, CancellationToken token = default)
     {
         IQueryable<ResultEntity> query = _context.ResultEntities;
 

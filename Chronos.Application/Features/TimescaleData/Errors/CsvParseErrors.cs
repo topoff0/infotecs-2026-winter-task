@@ -1,6 +1,6 @@
 ﻿using Chronos.Application.Common.Errors;
 
-namespace Chronos.Application.Features.ResultsData.Errors;
+namespace Chronos.Application.Features.TimescaleData.Errors;
 
 public static class CsvParseErrors
 {

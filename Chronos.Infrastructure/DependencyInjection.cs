@@ -1,4 +1,5 @@
-﻿using Chronos.Application.Features.ResultsData.Commands;
+﻿using Chronos.Application.Features.TimescaleData.Commands;
+using Chronos.Application.Features.TimescaleData.Queries;
 using Chronos.Application.Services;
 using Chronos.Core.Repositories;
 using Chronos.Core.Repositories.Common;
@@ -92,6 +93,7 @@ public static class DependencyInjection
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssembly(typeof(ProcessFileAndSaveDataCommand).Assembly);
+            cfg.RegisterServicesFromAssembly(typeof(GetResultsWithFiltersQuery).Assembly);
         });
 
         return services;
