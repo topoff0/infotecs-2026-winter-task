@@ -1,6 +1,6 @@
 using Chronos.API.Contracts.Requests;
+using Chronos.Application.Common.Errors;
 using Chronos.Application.Features.TimescaleData.Commands;
-using Chronos.Application.Features.TimescaleData.DTOs.Filters;
 using Chronos.Application.Features.TimescaleData.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +14,11 @@ namespace Chronos.API.Controllers
         private readonly IMediator _mediator = mediator;
 
         [HttpPost("process-csv-file")]
-        public async Task<IActionResult> ProcessFile([FromForm] ProcessFileRequest request, CancellationToken token)
+        public async Task<IActionResult> ProcessFile([FromForm] ProcessFileRequest request,
+                                                     CancellationToken token)
         {
+            if (request.File == null)
+                return BadRequest(Error.Failure("request.empty", "File field is required"));
             await using var stream = request.File.OpenReadStream();
 
             var command = new ProcessFileAndSaveDataCommand(request.File.FileName, stream);
@@ -29,9 +32,10 @@ namespace Chronos.API.Controllers
 
 
         [HttpGet("results-filtered")]
-        public async Task<IActionResult> GetResultsWithFilters([FromQuery] ResultFilters filters, CancellationToken token)
+        public async Task<IActionResult> GetResultsWithFilters([FromQuery] GetResultsWithFiltersRequest request,
+                                                               CancellationToken token)
         {
-            var query = new GetResultsWithFiltersQuery(filters);
+            var query = new GetResultsWithFiltersQuery(request.Filters);
 
             var result = await _mediator.Send(query, token);
 

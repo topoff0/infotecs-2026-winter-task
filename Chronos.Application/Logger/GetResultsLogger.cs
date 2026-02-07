@@ -32,7 +32,7 @@ public static partial class GetResultsLogger
     [LoggerMessage(
         EventId = 204,
         Level = LogLevel.Information,
-        Message = "Successfully get {Count} results")]
+        Message = "Successfully get last {Count} ordered results")]
     public static partial void LogSuccessfulGetLastOrderedResults(this ILogger logger, int count);
 
     [LoggerMessage(
