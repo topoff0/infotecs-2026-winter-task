@@ -1,7 +1,6 @@
 using Chronos.API.Contracts.Requests;
 using Chronos.Application.Common.Errors;
 using Chronos.Application.Features.TimescaleData.Commands;
-using Chronos.Application.Features.TimescaleData.DTOs.Filters;
 using Chronos.Application.Features.TimescaleData.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -33,10 +32,14 @@ namespace Chronos.API.Controllers
 
 
         [HttpGet("results-filtered")]
-        public async Task<IActionResult> GetResultsWithFilters([FromQuery] ResultFilters filters,
+        public async Task<IActionResult> GetResultsWithFilters([FromQuery] GetResultsWithFiltersRequest request,
                                                                CancellationToken token)
         {
-            var query = new GetResultsWithFiltersQuery(filters);
+            var filtersResult = request.ToResultFilters();
+            if (!filtersResult.IsSuccess)
+                return BadRequest(filtersResult.Error);
+
+            var query = new GetResultsWithFiltersQuery(filtersResult.Value);
 
             var result = await _mediator.Send(query, token);
 

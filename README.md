@@ -38,23 +38,28 @@
 1. Склонировать репозиторий:
 
     ```bash
-        git clone [https://github.com/topoff0/infotecs-2026-winter-task.git](https://github.com/topoff0/infotecs-2026-winter-task.git)
+    git clone https://github.com/topoff0/infotecs-2026-winter-task
     ```
 
 2. Перейти в директорию проекта:
     ```bash
-        cd infotecs-2026-winter-task
+    cd infotecs-2026-winter-task
     ```
 
 3. Скопировать пример конфигурации:
 
     ```bash
-        cp .env.example .env
+    cp .env.example .env
     ```
 
 4. Запустить сервисы:
     ```bash
-        docker-compose up --build
+    docker compose up --build -d
+    ```
+
+5. Остановить приложение:
+    ```bash
+    docker compose down
     ```
 
 API будет доступен по умолчанию на `http://localhost:8080`

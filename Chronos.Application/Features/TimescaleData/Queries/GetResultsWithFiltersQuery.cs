@@ -22,6 +22,10 @@ public sealed class GetResultWithFilterQueryHandler(IResultEntityRepository resu
 
     public async Task<ResultT<IReadOnlyList<ResultEntity>>> Handle(GetResultsWithFiltersQuery request, CancellationToken token)
     {
+        var validation = request.Filters.Validate();
+        if (!validation.IsSuccess)
+            return ResultT<IReadOnlyList<ResultEntity>>.Failure(validation.Error!);
+
         try
         {
             _logger.LogStartGetResultsWithFilters(request.Filters);
@@ -41,3 +45,4 @@ public sealed class GetResultWithFilterQueryHandler(IResultEntityRepository resu
         }
     }
 }
+
