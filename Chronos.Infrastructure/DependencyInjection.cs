@@ -33,7 +33,6 @@ public static class DependencyInjection
 
         try
         {
-            // TODO: Add logger
             var pendingingMigraitons = await context.Database.GetPendingMigrationsAsync();
 
             if (pendingingMigraitons.Any())
@@ -43,7 +42,6 @@ public static class DependencyInjection
         }
         catch (Exception)
         {
-            // TODO: Add logger
             throw;
         }
     }

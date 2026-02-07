@@ -52,12 +52,17 @@
     cp .env.example .env
     ```
 
-4. Запустить сервисы:
+4. Создать миграции
+    ```bash
+    dotnet ef migrations add "Initial" --project Chronos.Infrastructure --startup-project Chronos.API
+    ```
+
+5. Запустить сервисы:
     ```bash
     docker compose up --build -d
     ```
 
-5. Остановить приложение:
+6. Остановить приложение:
     ```bash
     docker compose down
     ```
