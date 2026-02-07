@@ -40,5 +40,22 @@ namespace Chronos.API.Controllers
 
             return BadRequest(result.Error!.Description);
         }
+
+        [HttpGet("results-by-filename-last")]
+        public async Task<IActionResult> GetLastResults([FromQuery] string fileName, CancellationToken token)
+        {
+            // NOTE:In the future can be changed the result's count
+            // (just change the request fileName to 'LastResultsByFileNameFilter'
+            var filter = new LastResultsByFileNameFilter(fileName);
+
+            var query = new GetLastResultsByFileNameQuery(filter);
+
+            var result = await _mediator.Send(query, token);
+
+            if (result.IsSuccess)
+                return Ok(result.Value);
+
+            return BadRequest(result.Error!.Description);
+        }
     }
 }

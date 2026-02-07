@@ -5,7 +5,7 @@ using Chronos.Core.Repositories.Common;
 
 namespace Chronos.Application.Specifications;
 
-public sealed class LastResultsByFileSpecification(LastResultsByFileFilter filter) : ISpecification<ResultEntity>
+public sealed class LastResultsByFileSpecification(LastResultsByFileNameFilter filter) : ISpecification<ResultEntity>
 {
     public Expression<Func<ResultEntity, bool>> Criteria { get; } = r => r.FileName == filter.FileName;
     //NOTE: Maybe do it better *_*

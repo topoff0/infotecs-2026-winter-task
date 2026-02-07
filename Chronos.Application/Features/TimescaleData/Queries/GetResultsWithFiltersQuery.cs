@@ -1,6 +1,7 @@
 ﻿using Chronos.Application.Common.Errors;
 using Chronos.Application.Common.Results;
 using Chronos.Application.Features.TimescaleData.DTOs.Filters;
+using Chronos.Application.Features.TimescaleData.Errors;
 using Chronos.Application.Specifications;
 using Chronos.Core.Entities;
 using Chronos.Core.Repositories;
@@ -28,9 +29,7 @@ public sealed class GetResultWithFilterQueryHandler(IResultEntityRepository resu
         }
         catch (Exception ex)
         {
-            return Error.Failure(
-                "results.getFilteredFailed", 
-                "Failed to retrieve results");
+            return GetResultsErrors.GetFilteredResultsError();
         }
     }
 }

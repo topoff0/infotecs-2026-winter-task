@@ -94,6 +94,7 @@ public static class DependencyInjection
         {
             cfg.RegisterServicesFromAssembly(typeof(ProcessFileAndSaveDataCommand).Assembly);
             cfg.RegisterServicesFromAssembly(typeof(GetResultsWithFiltersQuery).Assembly);
+            cfg.RegisterServicesFromAssembly(typeof(GetLastResultsByFileNameQuery).Assembly);
         });
 
         return services;
