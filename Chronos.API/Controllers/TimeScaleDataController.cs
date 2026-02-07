@@ -42,13 +42,9 @@ namespace Chronos.API.Controllers
         }
 
         [HttpGet("results-by-filename-last")]
-        public async Task<IActionResult> GetLastResults([FromQuery] string fileName, CancellationToken token)
+        public async Task<IActionResult> GetLastResults(CancellationToken token)
         {
-            // NOTE:In the future can be changed the result's count
-            // (just change the request fileName to 'LastResultsByFileNameFilter'
-            var filter = new LastResultsByFileNameFilter(fileName);
-
-            var query = new GetLastResultsByFileNameQuery(filter);
+            var query = new GetLastOrderedResultsQuery();
 
             var result = await _mediator.Send(query, token);
 

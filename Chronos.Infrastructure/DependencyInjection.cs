@@ -1,5 +1,4 @@
-﻿using Chronos.Application.Features.TimescaleData.Commands;
-using Chronos.Application.Features.TimescaleData.Queries;
+﻿using Chronos.Application.Features.TimescaleData.Commands; using Chronos.Application.Features.TimescaleData.Queries;
 using Chronos.Application.Services;
 using Chronos.Core.Repositories;
 using Chronos.Core.Repositories.Common;
@@ -94,7 +93,7 @@ public static class DependencyInjection
         {
             cfg.RegisterServicesFromAssembly(typeof(ProcessFileAndSaveDataCommand).Assembly);
             cfg.RegisterServicesFromAssembly(typeof(GetResultsWithFiltersQuery).Assembly);
-            cfg.RegisterServicesFromAssembly(typeof(GetLastResultsByFileNameQuery).Assembly);
+            cfg.RegisterServicesFromAssembly(typeof(GetLastOrderedResultsQuery).Assembly);
         });
 
         return services;

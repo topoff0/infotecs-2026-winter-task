@@ -1,6 +1,5 @@
 ﻿using Chronos.Core.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Chronos.Infrastructure.Persistence.Repositories.Common;
 
