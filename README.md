@@ -38,9 +38,8 @@
 1. Склонировать репозиторий:
 
    ```bash
+        git clone [https://github.com/topoff0/infotecs-2026-winter-task.git](https://github.com/topoff0/infotecs-2026-winter-task.git)
    ```
-
-git clone [https://github.com/topoff0/infotecs-2026-winter-task.git](https://github.com/topoff0/infotecs-2026-winter-task.git)
 
 ````
 2. Перейти в директорию проекта:
@@ -51,9 +50,8 @@ cd infotecs-2026-winter-task
 3. Скопировать пример конфигурации:
 
    ```bash
+        cp .env.example .env
    ```
-
-cp .env.example .env
 
 ````
 4. Запустить сервисы:
