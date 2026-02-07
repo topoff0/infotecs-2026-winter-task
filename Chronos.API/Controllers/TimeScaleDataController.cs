@@ -1,6 +1,7 @@
 using Chronos.API.Contracts.Requests;
 using Chronos.Application.Common.Errors;
 using Chronos.Application.Features.TimescaleData.Commands;
+using Chronos.Application.Features.TimescaleData.DTOs.Filters;
 using Chronos.Application.Features.TimescaleData.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace Chronos.API.Controllers
         public async Task<IActionResult> ProcessFile([FromForm] ProcessFileRequest request,
                                                      CancellationToken token)
         {
-            if (request.File == null)
+            if (request.File is null || request.File.Length == 0)
                 return BadRequest(Error.Failure("request.empty", "File field is required"));
             await using var stream = request.File.OpenReadStream();
 
@@ -32,10 +33,10 @@ namespace Chronos.API.Controllers
 
 
         [HttpGet("results-filtered")]
-        public async Task<IActionResult> GetResultsWithFilters([FromQuery] GetResultsWithFiltersRequest request,
+        public async Task<IActionResult> GetResultsWithFilters([FromQuery] ResultFilters filters,
                                                                CancellationToken token)
         {
-            var query = new GetResultsWithFiltersQuery(request.Filters);
+            var query = new GetResultsWithFiltersQuery(filters);
 
             var result = await _mediator.Send(query, token);
 
