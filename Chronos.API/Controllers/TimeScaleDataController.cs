@@ -24,7 +24,7 @@ namespace Chronos.API.Controllers
             if (result.IsSuccess)
                 return Ok();
 
-            return BadRequest(result.Error!.Description);
+            return BadRequest(result.Error);
         }
 
 
@@ -38,7 +38,7 @@ namespace Chronos.API.Controllers
             if (result.IsSuccess)
                 return Ok(result.Value);
 
-            return BadRequest(result.Error!.Description);
+            return BadRequest(result.Error);
         }
 
         [HttpGet("results-by-filename-last")]
@@ -51,7 +51,7 @@ namespace Chronos.API.Controllers
             if (result.IsSuccess)
                 return Ok(result.Value);
 
-            return BadRequest(result.Error!.Description);
+            return BadRequest(result.Error);
         }
     }
 }
